@@ -13,14 +13,6 @@ var schema = new Schema({
         required: true,
         validate: validators.isEmail()
     },
-    mobile: {
-        type: Number,
-        required: true
-    },
-    salary: {
-        type: Number,
-        required: true
-    },
     address: {
         type: String,
         required: true
@@ -49,24 +41,19 @@ var schema = new Schema({
         type: Date,
         required: true
     },
-    isShopEmployee: {
-        type: Boolean,
-        required: true
-    },
-    role: {
-        type: Schema.Types.ObjectId,
-        ref: 'Role',
-        index: true
+    rights: {
+        type: String,
+        enum: ["Employee", "Owner"]
     },
     shop: {
-        type: String,
-        required: true
+        type: Schema.Types.ObjectId,
+        ref: 'Shop',
+        index: true
     },
-    Password:{
+    password: {
         type: String,
         required: true
     }
-
 });
 
 schema.plugin(deepPopulate, {});
@@ -74,6 +61,23 @@ schema.plugin(uniqueValidator);
 schema.plugin(timestamps);
 module.exports = mongoose.model('Employee', schema);
 
-var exports = _.cloneDeep(require("sails-wohlig-service")(schema,"role","role"));
-var model = {};
+var exports = _.cloneDeep(require("sails-wohlig-service")(schema));
+var model = {
+    login: function (data, res) {
+        Employee.findOne({
+            email: data.email,
+            password: data.password
+        }).exec(function (err, data) {
+            if (err || _.isEmpty(data)) {
+                res(err, null)
+            } else {
+                console.log("Data",data);
+                var token = jwt.sign({token:data}, 'Sanket');
+               
+                 res.setHeader("Authorisation",token)
+                res.callback(null,true);
+            }
+        })
+    }
+};
 module.exports = _.assign(module.exports, exports, model);

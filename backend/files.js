@@ -2,7 +2,6 @@ module.exports = [
     'bower_components/jquery/dist/jquery.min.js',
     'bower_components/jStorage/jstorage.js',
     'bower_components/jquery-ui/jquery-ui.js',
-    'bower_components/flexslider/jquery.flexslider-min.js',
     'bower_components/popper.js/dist/umd/popper.min.js',
     'bower_components/bootstrap/dist/js/bootstrap.min.js',
     'bower_components/fancybox/dist/jquery.fancybox.js',

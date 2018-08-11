@@ -82,8 +82,7 @@ global.validators = require('mongoose-validators');
 global.monguurl = require('monguurl');
 require('mongoose-middleware').initialize(mongoose);
 global.Schema = mongoose.Schema;
-
-
+global.jwt = require('jsonwebtoken');
 global.http = require('http');
 
 
