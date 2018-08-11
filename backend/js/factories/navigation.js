@@ -32,13 +32,12 @@ myApp.factory('NavigationService', function ($http) {
                 accessToken: $.jStorage.get("accessToken")
             };
             $http.post(adminurl + 'user/profile', data).then(function (data) {
-                data = data.data;
-                if (data.value === true) {
-                    $.jStorage.set("profile", data.data);
-                    callback();
-                } else {
-                    errorCallback(data.error);
-                }
+                callback(data);
+            });
+        },
+        login: function (data, callback) {
+            $http.post(adminurl + 'Employee/login', data).then(function (data) {
+                callback(data);
             });
         },
         makeactive: function (menuname) {
