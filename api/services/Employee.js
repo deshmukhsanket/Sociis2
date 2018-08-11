@@ -74,7 +74,7 @@ var model = {
                 console.log("Data",data);
                 var token = jwt.sign({token:data}, 'Sanket');
                
-                 res.setHeader("Authorisation",token)
+                 res.setHeader("authorization","Bearer "+token)
                 res.callback(null,true);
             }
         })

@@ -9,6 +9,11 @@ var controller = {
                 data: null
             })
         }
+    },
+
+    temp:function(req,res){
+        console.log("done")
+        res.callback(null,true);
     }
 };
 module.exports = _.assign(module.exports, controller);
