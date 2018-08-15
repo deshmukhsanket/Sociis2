@@ -69,15 +69,16 @@ var model = {
             password: data.password
         }).exec(function (err, data) {
             if (err || _.isEmpty(data)) {
-                res(err, null)
+                res(err, null);
             } else {
-                console.log("Data",data);
-                var token = jwt.sign({token:data}, 'Sanket');
-               
-                 res.setHeader("authorization","Bearer "+token)
-                res.callback(null,true);
+                console.log("Data", data);
+                var token = jwt.sign({
+                    token: data
+                }, 'Sanket');
+                res.setHeader("authorization", "Bearer " + token);
+                res.callback(null, true);
             }
-        })
+        });
     }
 };
 module.exports = _.assign(module.exports, exports, model);

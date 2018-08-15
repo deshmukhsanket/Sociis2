@@ -601,9 +601,9 @@ myApp.controller('DashboardCtrl', function ($scope, TemplateService, NavigationS
         TemplateService.title = $scope.menutitle;
         $scope.template = TemplateService;
         $scope.currentHost = window.location.origin;
-        $scope.formData={};
-        $scope.login=function(){
-            NavigationService.login($scope.formData,function(data){
+        $scope.formData = {};
+        $scope.login = function () {
+            NavigationService.login($scope.formData, function (data) {
                 console.log("HIIII");
             })
         }
