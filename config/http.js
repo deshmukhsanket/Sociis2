@@ -60,37 +60,37 @@ module.exports.http = {
             // console.log(req.models);
             req.model = mongoose.models[_.upperFirst(req.models[2])];
             req.modelName = _.upperFirst(req.models[2]);
-            //     if(req.body.authorise){
-            //         token = req.headers.authorization.split(" ")[1]
-            //     jwt.verify(token, 'Sanket', function(err, decoded) {
-            //         req.login=decoded;
-            //     next()
-            //     })              
-            // }else{
-            next();
-            // }
-            // if (req.body && req.body._accessToken) {
-            //     User.findOne({
-            //         accessToken: req.body._accessToken
-            //     }, function (err, data) {
-            //         if (err) {
-            //             res.json({
-            //                 error: err,
-            //                 value: false
-            //             });
-            //         } else if (data) {
-            //             req.user = data;
-            //             next();
-            //         } else {
-            //             res.json({
-            //                 error: "Invalid AccessToken",
-            //                 value: false
-            //             });
-            //         }
-            //     }, "Get Google");
-            // } else {
-            //     next();
-            // }
+            // //     if(req.body.authorise){
+            // //         token = req.headers.authorization.split(" ")[1]
+            // //     jwt.verify(token, 'Sanket', function(err, decoded) {
+            // //         req.login=decoded;
+            // //     next()
+            // //     })              
+            // // }else{
+            // next();
+            // // }
+            if (req.body && req.body._accessToken) {
+                User.findOne({
+                    accessToken: req.body._accessToken
+                }, function (err, data) {
+                    if (err) {
+                        res.json({
+                            error: err,
+                            value: false
+                        });
+                    } else if (data) {
+                        req.user = data;
+                        next();
+                    } else {
+                        res.json({
+                            error: "Invalid AccessToken",
+                            value: false
+                        });
+                    }
+                }, "Get Google");
+            } else {
+                next();
+            }
         }
 
 

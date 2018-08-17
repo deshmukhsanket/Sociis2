@@ -1,13 +1,17 @@
 var schema = new Schema({
     name: {
         type: String,
-        required: true,
-        unique: true,
-        uniqueCaseInsensitive: true,
-        excel: {
-            name: "Name"
-        }
-    }
+    },
+    shop: {
+        type: Schema.Types.ObjectId
+    },
+    totalQuantity: Number,
+    productDetails: [{
+        quantity: Number,
+        CP: Number,
+        SP: Number
+    }],
+    tax: []
 });
 
 schema.plugin(deepPopulate, {});
