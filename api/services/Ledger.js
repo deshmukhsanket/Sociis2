@@ -35,8 +35,11 @@ var model = {
                         if (err) {
                             callback();
                         } else {
-                            if (isNaN(product.totalQuantity) || product.totalQuantity == undefined) {
+                            if (product.totalQuantity == undefined) {
                                 product.totalQuantity = 0;
+                            }
+                            if (isNaN(product.totalQuantity)) {
+                                product.totalQuantity = parseFloat(product.totalQuantity);
                             }
                             product.productDetails.push(n);
                             product.totalQuantity = product.totalQuantity + n.quantity;
